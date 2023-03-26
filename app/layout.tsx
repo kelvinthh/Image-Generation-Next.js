@@ -1,5 +1,6 @@
-import Header from '@/components/Header';
+import Header from "@/components/Header";
 import "../styles/globals.css";
+import Prompt from "@/components/Prompt";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,9 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-      <Header />
-      {children}
+      <body className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <Header />
+        <Prompt />
+        {/* {children} */}
       </body>
     </html>
   );
