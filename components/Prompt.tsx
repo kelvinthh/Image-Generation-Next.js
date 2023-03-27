@@ -8,17 +8,20 @@ import useSWR from "swr";
 function Prompt() {
   const [input, setInput] = useState("");
 
-  const { data: suggestion, isLoading, mutate, isValidating } = useSWR(
-    "/api/suggestion",
-    fetchSuggestionFromChatGPT,
-    {
-      revalidateOnFocus: false,
-    }
-  );
-
-  useEffect(() => {
-    console.log(`Current prompt: ${input}`);
+  const {
+    data: suggestion,
+    isLoading,
+    mutate,
+    isValidating,
+  } = useSWR("/api/suggestion", fetchSuggestionFromChatGPT, {
+    revalidateOnFocus: false,
   });
+
+  console.log(suggestion);
+
+  // useEffect(() => {
+  //   console.log(`Current prompt: ${input}`);
+  // });
 
   return (
     <div className="m-10">
