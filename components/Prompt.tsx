@@ -1,14 +1,25 @@
-'use client'
-import { useEffect, useState } from 'react';
+"use client";
+import fetchSuggestionFromChatGPT from "@/lib/fetchSuggestionFromChatGPT";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
 
- // Declare this a client-side component
+// Declare this a client-side component
 
 function Prompt() {
-    const [input, setInput] = useState("");
-    useEffect(() => {
-        console.log(`Current prompt: ${input}`)
-      });
-    
+  const [input, setInput] = useState("");
+
+  const { data: suggestion, isLoading, mutate, isValidating } = useSWR(
+    "/api/suggestion",
+    fetchSuggestionFromChatGPT,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+
+  useEffect(() => {
+    console.log(`Current prompt: ${input}`);
+  });
+
   return (
     <div className="m-10">
       <form className="flex flex-col lg:flex-row lg:divide-x rounded-md shadow-md">
@@ -19,7 +30,11 @@ function Prompt() {
           onChange={(e) => setInput(e.target.value)}
         />
         <button
-          className={`p-4 font-bold ${input ? "bg-violet-500 text-purple-50" : "text-gray-300 cursor-not-allowed"}`}
+          className={`p-4 font-bold ${
+            input
+              ? "bg-violet-500 text-purple-50"
+              : "text-gray-300 cursor-not-allowed"
+          }`}
           type="submit"
           disabled={!input}
         >
