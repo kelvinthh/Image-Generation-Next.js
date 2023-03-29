@@ -7,8 +7,10 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0-alpha.7"
+    "@azure/functions": "^4.0.0-alpha.7",
+    "@azure/storage-blob": "^12.13.0",
+    "axios": "^1.3.4",
+    "openai": "^3.2.1"
   },
-  "devDependencies": {},
   "main": "src/functions/*.js"
 }
