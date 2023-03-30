@@ -1,6 +1,6 @@
 "use client";
 import fetchSuggestionFromChatGPT from "@/lib/fetchSuggestionFromChatGPT";
-import { useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import useSWR from "swr";
 
 // Declare this a client-side component
@@ -19,26 +19,54 @@ function Prompt() {
 
   const loading = isLoading || isValidating;
 
-  const HandlePlaceholder = () => {
+  const handlePlaceHolder = () => {
     if (loading) return "I'm thinking of a prompt for you...";
     if (suggestion) return suggestion;
     else return "Enter a prompt here.";
   };
 
-  const SuggestionBlockWhenHasInput = () => {
+  const suggestionBlockWhenHasInput = () => {
     if (input)
       return (
-        <p className='italic pt-2 pl-2 font-light text-gray-300'>
-          Suggestion: <span className='text-white'>{suggestion}</span>
+        <p className="italic pt-2 pl-2 font-light text-gray-300">
+          Suggestion: <span className="text-white">{suggestion}</span>
         </p>
       );
   };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    console.log("Submit clicked!")
+    e.preventDefault();
+    await submitPrompt();
+  };
+
+  const submitPrompt = async (useSuggestion?: boolean) => {
+    const inputPrompt = input;
+    setInput("");
+
+    console.log("Input prompt is: " + inputPrompt);
+
+    const prompt = useSuggestion ? suggestion : inputPrompt;
+
+    const res = await fetch("/api/generateImage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: prompt }),
+    });
+
+    const data = await res.json();
+  };
+
   return (
     <div className="m-10">
-      <form className="flex flex-col lg:flex-row lg:divide-x rounded-md shadow-md">
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className="flex flex-col lg:flex-row lg:divide-x rounded-md shadow-md"
+      >
         <textarea
-          placeholder={HandlePlaceholder()}
+          placeholder={handlePlaceHolder()}
           className="flex-1 p-4 rounded-lg"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -68,7 +96,7 @@ function Prompt() {
           Use Suggestion.
         </button>
       </form>
-      {SuggestionBlockWhenHasInput()}
+      {suggestionBlockWhenHasInput()}
     </div>
   );
 }

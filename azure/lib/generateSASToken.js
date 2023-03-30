@@ -39,7 +39,7 @@ async function generateSASToken() {
     },
     sharedKeyCredential
   ).toString();
-  return sasToken
+  return sasToken;
 }
 
 module.exports = generateSASToken;

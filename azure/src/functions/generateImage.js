@@ -23,7 +23,6 @@ app.http("generateImage", {
     });
 
     image_url = response.data.data[0].url;
-
     console.log("Image URL: " + image_url);
 
     // Download the image as an ArrayBuffer
@@ -36,9 +35,6 @@ app.http("generateImage", {
     const blobServiceClient = new BlobServiceClient(
       `https://${accountName}.blob.core.windows.net?${sasToken}`
     );
-
-    console.log("Account Name: " + accountName);
-    console.log("sasToken: " + sasToken);
 
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
