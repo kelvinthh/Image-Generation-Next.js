@@ -50,5 +50,6 @@ app.http("generateImage", {
     } catch (e) {
       console.error("Failed to upload:", e.message);
     }
+    return { body: "Successfully generated and uploaded an image." };
   },
 });
