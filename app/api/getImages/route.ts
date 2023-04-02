@@ -1,5 +1,5 @@
 export async function GET(request: Request) {
-  const response = await fetch("http://127.0.0.1:7071/api/getImages", {
+  const response = await fetch(`${process.env.REMOTE_HOST}${process.env.API_GET_IMAGES}`, {
     cache: "no-store",
   });
   const blob = await response.blob();

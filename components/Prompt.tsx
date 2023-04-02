@@ -1,7 +1,9 @@
 "use client";
+import fetchImages from "@/lib/fetchImages";
 import fetchSuggestionFromChatGPT from "@/lib/fetchSuggestionFromChatGPT";
 import { FormEvent, useState } from "react";
 import useSWR from "swr";
+import toast from "react-hot-toast";
 
 // Declare this a client-side component
 
@@ -14,6 +16,10 @@ function Prompt() {
     mutate,
     isValidating,
   } = useSWR("/api/suggestion", fetchSuggestionFromChatGPT, {
+    revalidateOnFocus: false,
+  });
+
+  const { mutate: updateImages } = useSWR("/api/getImages", fetchImages, {
     revalidateOnFocus: false,
   });
 
@@ -35,9 +41,14 @@ function Prompt() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    console.log("Submit clicked!")
+    console.log("Submit clicked!");
     e.preventDefault();
     await submitPrompt();
+  };
+
+  const handleUseSuggestion = async () => {
+    console.log("Use Suggestion clicked!");
+    await submitPrompt(true);
   };
 
   const submitPrompt = async (useSuggestion?: boolean) => {
@@ -48,6 +59,13 @@ function Prompt() {
 
     const prompt = useSuggestion ? suggestion : inputPrompt;
 
+    const notificationPrompt = prompt;
+    const notificationPromptPromptShort = notificationPrompt.slice(0, 20);
+
+    const notification = toast.loading(
+      `DALL‧E is creating: ${notificationPromptPromptShort}...`
+    );
+
     const res = await fetch("/api/generateImage", {
       method: "POST",
       headers: {
@@ -57,6 +75,18 @@ function Prompt() {
     });
 
     const data = await res.json();
+
+    if (data.error) {
+      toast.error(data.error, {
+        id: notification
+      });
+    } else {
+      toast.success("Your image has been generated!!!", {
+        id: notification,
+      });
+    }
+
+    updateImages();
   };
 
   return (
@@ -92,6 +122,7 @@ function Prompt() {
         <button
           className="p-4 bg-purple-100 text-purple-800 border-none transition-colors duration-150 font-bold"
           type="button"
+          onClick={() => handleUseSuggestion()}
         >
           Use Suggestion.
         </button>
