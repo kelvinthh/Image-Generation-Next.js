@@ -1,7 +1,9 @@
+import Images from '@/components/Images';
+
 export default function Home() {
   return (
-    <main>
-      <h1 className='text-red-500'>Hello World</h1>
+    <main className="mx-0">
+      <Images/>
     </main>
   )
 }
