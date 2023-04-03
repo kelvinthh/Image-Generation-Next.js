@@ -75,9 +75,12 @@ function Prompt() {
     });
 
     const data = await res.json();
+    const msg = JSON.stringify(data)
 
-    if (data.error) {
-      toast.error(data.error, {
+    // console.log(`${data.error} ${msg}`)
+
+    if (data.error || msg.includes("Error processing the prompt") || msg.includes("Request failed")) {
+      toast.error("Unable to process the request.", {
         id: notification
       });
     } else {
