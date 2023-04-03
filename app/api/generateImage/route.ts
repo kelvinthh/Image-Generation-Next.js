@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   const res = await request.json();
   const prompt = res.prompt;
 
-  const response = await fetch("https://img-gen-toronto-2023.azurewebsites.net/api/generateimage", {
+  const response = await fetch(`${process.env.REMOTE_HOST}${process.env.API_GENERATE_IMAGE}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,6 +12,5 @@ export async function POST(request: Request) {
     body: JSON.stringify({ prompt }),
   });
   const textData = await response.text();
-
   return NextResponse.json(textData);
 }
