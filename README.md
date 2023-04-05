@@ -30,27 +30,30 @@ To clone and run this project, you'll need the following:
 
 3. Make sure you created your Function App on Azure and map it to the project's `azure` folder under the root folder.
 
-4. Configure your local environment file (.env) with the required API keys and credentials:
+4. Install dependencies inside the Azure folder
+`cd azure && npm install`
+
+5. Configure your local environment file (.env) with the required API keys and credentials:
 ```
 // .env
 OPEN_AI_ORG=org-your_open_ai_account  
 OPEN_AI_API_KEY=your_open_ai_key  
-REMOTE_HOST=your_remote_host_url_or_localhost/127.0.0.1_in_dev
+REMOTE_HOST=your_azure_remote_host_url_or_localhost/http://127.0.0.1:7071_in_dev
 API_GENERATE_IMAGE=your_generateImage_api_endpoint
 API_GET_IMAGES=your_getImages_api_endpoint
 API_GET_SUGGESTIONS=your_getChatGPTSuggestion_api_endpoint
 ```
-5. In VSCode click `Windows: Control + P / Mac: Command + P` and type `Azure Functions: Download Remote Settings...`
+6. In VSCode click `Windows: Control + P / Mac: Command + P` and type `Azure Functions: Download Remote Settings...`
 
-6. Add the lines `OPEN_AI_ORG` & `OPEN_AI_API_KEY` from your project `.env` file to `azure`'s `local.settings.json`
+7. Add the lines `OPEN_AI_ORG` & `OPEN_AI_API_KEY` from your project `.env` file to `azure`'s `local.settings.json`
 
-7. Run the development server:
+8. Run the development server:
 `npm run dev`
 
-8. Run the local Azure Function development server:
+9. Run the local Azure Function development server:
 `cd azure && npm run start` 
 
-6. Open your browser and navigate to http://localhost:3000 to see the app running.
+10. Open your browser and navigate to http://localhost:3000 to see the app running.
 
 ## Deployment 🌐
 ### Front-end (Vercel)

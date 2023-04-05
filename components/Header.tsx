@@ -22,7 +22,7 @@ function Header() {
       </div>
       {/* Right */}
       <div className="flex flex-col sm:flex-row text-xs md:text-base items-center ">
-        <Link className="px-2 font-light" href={"https://github.com/kelvinthh/Image-Generaton-Next.js"}>GitHub</Link>
+        <Link className="px-2 font-light" href={"https://github.com/kelvinthh/Image-Generation-Next.js"}>GitHub</Link>
         <Link className="px-2 font-light" href={"https://openai.com"}>OpenAI</Link>
         <Link className="px-2 font-light" href={"https://azure.microsoft.com"}>Azure</Link>
       </div>
