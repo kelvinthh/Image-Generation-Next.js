@@ -28,7 +28,7 @@ To clone and run this project, you'll need the following:
 2. Install dependencies:
 `npm install`
 
-3. Make sure you created your Function App on Azure and map it to the project's `azure` folder under the root folder.
+3. Make sure you created your Function App and Storage account for this project on Azure and map it to the project's `azure` folder under the root folder.
 
 4. Install dependencies inside the Azure folder
 `cd azure && npm install`
@@ -38,20 +38,24 @@ To clone and run this project, you'll need the following:
 // .env
 OPEN_AI_ORG=org-your_open_ai_account  
 OPEN_AI_API_KEY=your_open_ai_key  
-REMOTE_HOST=your_azure_remote_host_url_or_localhost/http://127.0.0.1:7071_in_dev
+REMOTE_HOST=your_azure_remote_host_url\ (Only if you deployed the Azure back-end)
+// REMOTE_HOST=http://127.0.0.1:7071 (Dev server only)
 API_GENERATE_IMAGE=your_generateImage_api_endpoint
 API_GET_IMAGES=your_getImages_api_endpoint
 API_GET_SUGGESTIONS=your_getChatGPTSuggestion_api_endpoint
 ```
+
+** If you need to find your Storage account access key: Go to Azure Portal > Your Storage account > Security + networking > Access key.
+
+
 6. In VSCode click `Windows: Control + P / Mac: Command + P` and type `Azure Functions: Download Remote Settings...`
 
 7. Add the lines `OPEN_AI_ORG` & `OPEN_AI_API_KEY` from your project `.env` file to `azure`'s `local.settings.json`
 
-8. Run the development server:
-`npm run dev`
+8. Run the local Azure development server `cd azure && npm run start`, then it should run at `http://localhost:7071`.
 
-9. Run the local Azure Function development server:
-`cd azure && npm run start` 
+9. Run the development server from the project's root directory:
+`npm run dev`
 
 10. Open your browser and navigate to http://localhost:3000 to see the app running.
 
