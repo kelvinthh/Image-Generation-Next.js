@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import gitHubIcon from "../public/img/25231.png"
 
 function Header() {
   return (
@@ -22,9 +23,23 @@ function Header() {
       </div>
       {/* Right */}
       <div className="flex flex-col sm:flex-row text-xs md:text-base items-center ">
-        <Link className="px-2 font-light" href={"https://github.com/kelvinthh/Image-Generation-Next.js"}>GitHub</Link>
-        <Link className="px-2 font-light" href={"https://openai.com"}>OpenAI</Link>
-        <Link className="px-2 font-light" href={"https://azure.microsoft.com"}>Azure</Link>
+        <Link
+          className="px-2 font-light"
+          href={"https://github.com/kelvinthh/Image-Generation-Next.js"}
+        >
+          <Image
+            src={gitHubIcon}
+            alt={"GitHub Repository"}
+            width={25}
+            height={25}
+          />
+        </Link>
+        <Link className="px-2 font-light" href={"https://openai.com"}>
+          OpenAI
+        </Link>
+        <Link className="px-2 font-light" href={"https://azure.microsoft.com"}>
+          Azure
+        </Link>
       </div>
     </header>
   );
