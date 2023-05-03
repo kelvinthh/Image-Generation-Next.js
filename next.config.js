@@ -4,9 +4,8 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: [
-      "imggentoronto20236753cc.blob.core.windows.net",
-    ],
+    unoptimized: true,
+    domains: ["imggentoronto20236753cc.blob.core.windows.net"],
   },
 };
 
