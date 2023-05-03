@@ -1,7 +1,7 @@
 "use client";
 import fetchImages from "@/lib/fetchImages";
 import fetchSuggestionFromChatGPT from "@/lib/fetchSuggestionFromChatGPT";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useCallback, use } from "react";
 import useSWR from "swr";
 import toast from "react-hot-toast";
 
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 function Prompt() {
   const [input, setInput] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const {
     data: suggestion,
@@ -40,18 +41,39 @@ function Prompt() {
       );
   };
 
+  const canGenerateImage = () => {
+    const lastGenerated = localStorage.getItem("lastGenerated");
+    if (!lastGenerated) return true;
+
+    const timeSinceLastGenerated = Date.now() - parseInt(lastGenerated, 10);
+    return timeSinceLastGenerated >= 20 * 1000;
+  };
+
+  const updateLastGenerated = () => {
+    localStorage.setItem("lastGenerated", Date.now().toString());
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log("Submit clicked!");
     e.preventDefault();
+    if (!canGenerateImage()) {
+      toast.error("You can only generate an image every 20 seconds.");
+      return;
+    }
     await submitPrompt();
   };
 
   const handleUseSuggestion = async () => {
     console.log("Use Suggestion clicked!");
+    if (!canGenerateImage()) {
+      toast.error("You can only generate an image every 20 seconds.");
+      return;
+    }
     await submitPrompt(true);
   };
 
   const submitPrompt = async (useSuggestion?: boolean) => {
+    setIsGenerating(true);
     const inputPrompt = input;
     setInput("");
 
@@ -75,21 +97,26 @@ function Prompt() {
     });
 
     const data = await res.json();
-    const msg = JSON.stringify(data)
+    const msg = JSON.stringify(data);
 
     // console.log(`${data.error} ${msg}`)
 
-    if (data.error || msg.includes("Error processing the prompt") || msg.includes("Request failed")) {
+    if (
+      data.error ||
+      msg.includes("Error processing the prompt") ||
+      msg.includes("Request failed")
+    ) {
       toast.error("Unable to process the request.", {
-        id: notification
+        id: notification,
       });
     } else {
       toast.success("Your image has been generated!!!", {
         id: notification,
       });
     }
-
+    setIsGenerating(false);
     updateImages();
+    updateLastGenerated();
   };
 
   return (
@@ -106,12 +133,12 @@ function Prompt() {
         />
         <button
           className={`p-4 font-bold ${
-            input
+            input && !isGenerating
               ? "bg-violet-700 text-white"
               : "text-gray-300 cursor-not-allowed"
           }`}
           type="submit"
-          disabled={!input}
+          disabled={!input || isGenerating}
         >
           Generate
         </button>
@@ -123,9 +150,14 @@ function Prompt() {
           Gimme a new suggestion!
         </button>
         <button
-          className="p-4 bg-purple-100 text-purple-800 border-none transition-colors duration-150 font-bold"
+          className={`p-4 ${
+            isGenerating
+              ? "bg-purple-50 text-purple-300 bg-transparent"
+              : "bg-purple-100 text-purple-800"
+          } border-none transition-colors duration-150 font-bold`}
           type="button"
           onClick={() => handleUseSuggestion()}
+          disabled={isGenerating}
         >
           Use Suggestion.
         </button>
