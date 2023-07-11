@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 function Prompt() {
   const [input, setInput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const GENERATE_COOLDOWN = 30;
 
   const {
     data: suggestion,
@@ -46,7 +47,7 @@ function Prompt() {
     if (!lastGenerated) return true;
 
     const timeSinceLastGenerated = Date.now() - parseInt(lastGenerated, 10);
-    return timeSinceLastGenerated >= 20 * 1000;
+    return timeSinceLastGenerated >= GENERATE_COOLDOWN * 1000;
   };
 
   const updateLastGenerated = () => {
@@ -57,7 +58,9 @@ function Prompt() {
     console.log("Submit clicked!");
     e.preventDefault();
     if (!canGenerateImage()) {
-      toast.error("You can only generate an image every 20 seconds.");
+      toast.error(
+        `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`
+      );
       return;
     }
     await submitPrompt();
@@ -66,7 +69,9 @@ function Prompt() {
   const handleUseSuggestion = async () => {
     console.log("Use Suggestion clicked!");
     if (!canGenerateImage()) {
-      toast.error("You can only generate an image every 20 seconds.");
+      toast.error(
+        `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`
+      );
       return;
     }
     await submitPrompt(true);
