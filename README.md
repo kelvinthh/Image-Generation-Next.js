@@ -2,7 +2,7 @@
 ## Live version: [https://img-gen-kelvinthh.vercel.app/](https://img-gen-kelvinthh.vercel.app/)
 ### React Native port w/ Android APK available: [https://github.com/kelvinthh/Image-Generation-RN](https://github.com/kelvinthh/Image-Generation-RN)
 
-![Preview](https://i.imgur.com/O16R04N.png)
+![Preview](https://i.imgur.com/i9ORKAW.png)
 
 This [Next.js](https://nextjs.org/) single-page web app allows users to generate images based on text prompts, utilizing OpenAI's [DALL-E](https://openai.com/research/dall-e/) and [ChatGPT](https://platform.openai.com/docs/guides/chat/gpt-3) APIs. The app is built using the powerful Next.js framework and styled with the popular [Tailwind CSS](https://tailwindcss.com/) utility-first CSS framework. It features serverless API backends powered by [Microsoft Azure](https://azure.microsoft.com/) Function App with HTTP triggers and a Storage Account for saving generated images in a blob container. Deployed on Azure (for the HTTP triggers) and [Vercel (for the front-end)](https://vercel.com/), this app offers a seamless and modern user experience.
 
