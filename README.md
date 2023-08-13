@@ -1,5 +1,5 @@
 # Next.js AI Image Generator with DALL-E and ChatGPT 🎨🤖
-## Live version: [https://img-gen-kelvinthh.vercel.app/](https://img-gen-kelvinthh.vercel.app/)
+## Live version: [https://img-gen.kelvintam.dev/](https://img-gen.kelvintam.dev/)
 ### React Native port w/ Android APK available: [https://github.com/kelvinthh/Image-Generation-RN](https://github.com/kelvinthh/Image-Generation-RN)
 
 ![Preview](https://i.imgur.com/i9ORKAW.png)
