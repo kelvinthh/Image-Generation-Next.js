@@ -128,17 +128,17 @@ function Prompt() {
     <div className="mx-8 mt-4 lg:mx-10 lg:mb-8">
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="flex flex-col lg:flex-row lg:divide-x lg:space-x-4 space-y-2 lg:space-y-0 rounded-md shadow-md lg:shadow-none"
+        className="flex flex-col lg:flex-row lg:divide-x lg:space-x-4 space-y-2 lg:space-y-0 rounded-md"
       >
         <textarea
           placeholder={handlePlaceHolder()}
-          className="flex-1 p-4 rounded-lg"
+          className="flex-1 p-4 rounded-lg drop-shadow"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
 
         <button
-          className={`p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white ${
+          className={`p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white drop-shadow ${
             (!input || isGenerating) && `opacity-50 cursor-not-allowed`
           }`}
           type="submit"
@@ -148,7 +148,7 @@ function Prompt() {
         </button>
 
         <button
-          className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl"
+          className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl drop-shadow"
           type="button"
           onClick={mutate}
         >
@@ -160,7 +160,7 @@ function Prompt() {
             isGenerating
               ? "bg-cyan-50 text-cyan-300 bg-transparent"
               : "bg-cyan-100 text-cyan-800"
-          } rounded-xl border-none transition-colors duration-150 font-bold`}
+          } rounded-xl border-none transition-colors duration-150 font-bold drop-shadow`}
           type="button"
           onClick={() => handleUseSuggestion()}
           disabled={isGenerating}
