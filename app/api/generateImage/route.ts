@@ -12,6 +12,6 @@ export async function POST(request: Request) {
     body: JSON.stringify({ prompt }),
   });
   const textData = await response.text();
-  console.log(response.status)
+  // console.log(response.status)
   return NextResponse.json(textData);
 }

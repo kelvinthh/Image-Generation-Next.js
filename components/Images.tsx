@@ -19,7 +19,7 @@ function Images() {
   });
 
   return (
-    <div>
+    <div className='p-8 lg:p-0'>
       <button
         onClick={() => refreshImages(images)}
         className="fixed bottom-10 right-10 bg-violet-400/90 text-white px-5 py-3 rounded-md hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-400 font-bold z-20"
@@ -37,11 +37,11 @@ function Images() {
             key={img.name}
             className={`relative cursor-help 
           ${i === 0 && "md:col-span-2 md:row-span-2"}
-          hover:scale-[103%] transition-transform duration-200
+          hover:scale-[103%] hover:-translate-y-2 transition-transform duration-200
           ease-in-out
           `}
           >
-            <div className="absolute flex justify-center items-center w-full h-full bg-white opacity-0 hover:opacity-80 transition-opacity duration-200 z-10">
+            <div className="absolute flex justify-center items-center w-full h-full bg-white opacity-0 hover:opacity-80 transition-opacity duration-200 z-10 rounded-xl">
               <p className="text-center font-light text-lg p-5">
                 {img.name.split("_").shift()?.toString().split(".").shift()}
               </p>
@@ -53,7 +53,7 @@ function Images() {
               alt={img.name}
               width={800}
               height={800}
-              className="w-full rounded-sm shadow-2xl drop-shadow-lg -z-10"
+              className="w-full rounded-xl shadow-2xl drop-shadow-lg -z-10"
             />
           </div>
         ))}

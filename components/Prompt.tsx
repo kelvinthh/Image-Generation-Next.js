@@ -55,7 +55,7 @@ function Prompt() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    console.log("Submit clicked!");
+    // console.log("Submit clicked!");
     e.preventDefault();
     if (!canGenerateImage()) {
       toast.error(
@@ -67,7 +67,7 @@ function Prompt() {
   };
 
   const handleUseSuggestion = async () => {
-    console.log("Use Suggestion clicked!");
+    // console.log("Use Suggestion clicked!");
     if (!canGenerateImage()) {
       toast.error(
         `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`
@@ -82,12 +82,12 @@ function Prompt() {
     const inputPrompt = input;
     setInput("");
 
-    console.log("Input prompt is: " + inputPrompt);
+    // console.log("Input prompt is: " + inputPrompt);
 
     const prompt = useSuggestion ? suggestion : inputPrompt;
 
     const notificationPrompt = prompt;
-    const notificationPromptPromptShort = notificationPrompt.slice(0, 20);
+    const notificationPromptPromptShort = notificationPrompt.slice(0, 40);
 
     const notification = toast.loading(
       `DALL‧E is creating: ${notificationPromptPromptShort}...`
@@ -125,10 +125,10 @@ function Prompt() {
   };
 
   return (
-    <div className="m-10">
+    <div className="mx-8 mt-4 lg:mx-10 lg:mb-8">
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="flex flex-col lg:flex-row lg:divide-x rounded-md shadow-md"
+        className="flex flex-col lg:flex-row lg:divide-x lg:space-x-4 space-y-2 lg:space-y-0 rounded-md shadow-md lg:shadow-none"
       >
         <textarea
           placeholder={handlePlaceHolder()}
@@ -136,30 +136,31 @@ function Prompt() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
+
         <button
-          className={`p-4 font-bold ${
-            input && !isGenerating
-              ? "bg-violet-700 text-white"
-              : "text-gray-300 cursor-not-allowed"
+          className={`p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white ${
+            (!input || isGenerating) && `opacity-50 cursor-not-allowed`
           }`}
           type="submit"
           disabled={!input || isGenerating}
         >
           Generate
         </button>
+
         <button
-          className="p-4 bg-purple-500 text-white border-none transition-colors duration-150 font-bold"
+          className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl"
           type="button"
           onClick={mutate}
         >
           Gimme a new suggestion!
         </button>
+
         <button
           className={`p-4 ${
             isGenerating
-              ? "bg-purple-50 text-purple-300 bg-transparent"
-              : "bg-purple-100 text-purple-800"
-          } border-none transition-colors duration-150 font-bold`}
+              ? "bg-cyan-50 text-cyan-300 bg-transparent"
+              : "bg-cyan-100 text-cyan-800"
+          } rounded-xl border-none transition-colors duration-150 font-bold`}
           type="button"
           onClick={() => handleUseSuggestion()}
           disabled={isGenerating}
