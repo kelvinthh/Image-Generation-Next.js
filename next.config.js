@@ -5,7 +5,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ["imggentoronto20236753cc.blob.core.windows.net"],
+    domains: ["imggentoronto20236753cc.blob.core.windows.net", "i.imgur.com"],
   },
 };
 
