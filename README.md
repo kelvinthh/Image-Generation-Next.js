@@ -47,6 +47,9 @@ OPEN_AI_API_KEY=your_open_ai_key
 API_GENERATE_IMAGE=your_generateImage_api_endpoint
 API_GET_IMAGES=your_getImages_api_endpoint
 API_GET_SUGGESTIONS=your_getChatGPTSuggestion_api_endpoint
+
+# // Google Analytics Measurement ID
+GA_ID=
 ```
 
 > If you need to find your Storage account access key: Go to Azure Portal > Your Storage account > Security + networking > Access key.
