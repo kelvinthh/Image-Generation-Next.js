@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import Prompt from "@/components/Prompt";
 import ClientProvider from "@/components/ClientProvider";
 import Head from "next/head";
-import Script from "next/script";
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata = {
   title: "AI Image Generator",
@@ -22,18 +22,6 @@ export default function RootLayout({
   const GA_MEASUREMENT_ID = process.env.GA_ID;
   return (
     <html lang="en">
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', '${GA_MEASUREMENT_ID}');
-        `}
-      </Script>
       <Head>
         {/* <!-- HTML Meta Tags --> */}
         <title>{metadata.title}</title>
@@ -54,6 +42,7 @@ export default function RootLayout({
         <meta name="twitter:description" content={metadata.description} />
         {/* <!-- Meta Tags Generated via https://www.opengraph.xyz --> */}
       </Head>
+      <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
       <body className="bg-gradient-to-r from-cyan-500 via-green-500 to-blue-500">
         <ClientProvider>
           <noscript className="flex underline bg-red-600 text-white justify-center">
