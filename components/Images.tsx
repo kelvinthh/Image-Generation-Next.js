@@ -19,7 +19,7 @@ function Images() {
   });
 
   return (
-    <div className='p-8 lg:p-0'>
+    <div className="p-8 lg:p-0">
       <button
         onClick={() => refreshImages(images)}
         className="fixed bottom-10 right-10 bg-green-400/90 text-white px-5 py-3 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400 font-bold z-20"
@@ -27,8 +27,12 @@ function Images() {
         {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
       </button>
       {isLoading && (
-        <p className="animate-pulse text-center text-white pb-7 font-extralight">
-          Loading <span className="text-black">AI</span> Generated Images...
+        <p className="animate-bounce text-center text-white pb-7 font-medium text-xl">
+          Loading{" "}
+          <span className="font-bold bg-clip-text bg-gradient-to-r from-indigo-400 via-pink-400 to-violet-400 drop-shadow text-transparent">
+            AI
+          </span>{" "}
+          Generated Images...
         </p>
       )}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-0 md:px-10">
