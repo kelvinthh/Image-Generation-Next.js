@@ -27,12 +27,12 @@ function Images() {
         {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
       </button>
       {isLoading && (
-        <p className="animate-bounce text-center text-slate-100 pb-7 font-medium text-xl mt-48 sm:mt-80 drop-shadow-sm text-transparent">
+        <p className="animate-bounce text-center text-slate-100 pb-7 font-normal text-xl mt-48 sm:mt-80 drop-shadow-sm text-transparent">
           Loading{" "}
-          <span className="font-bold bg-clip-text bg-gradient-to-r from-indigo-200 via-pink-200 to-violet-200 text-transparent">
+          <span className="font-bold bg-clip-text bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 text-transparent">
             AI
           </span>{" "}
-          Generated Images...
+          images from the secret storage room...
         </p>
       )}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-0 md:px-10">
