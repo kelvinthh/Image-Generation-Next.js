@@ -27,9 +27,9 @@ function Images() {
         {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
       </button>
       {isLoading && (
-        <p className="animate-bounce text-center text-white pb-7 font-medium text-xl">
+        <p className="animate-bounce text-center text-slate-100 pb-7 font-medium text-xl mt-48 sm:mt-80 drop-shadow-sm text-transparent">
           Loading{" "}
-          <span className="font-bold bg-clip-text bg-gradient-to-r from-indigo-400 via-pink-400 to-violet-400 drop-shadow text-transparent">
+          <span className="font-bold bg-clip-text bg-gradient-to-r from-indigo-200 via-pink-200 to-violet-200 text-transparent">
             AI
           </span>{" "}
           Generated Images...
