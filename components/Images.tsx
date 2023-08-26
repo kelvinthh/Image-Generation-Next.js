@@ -2,6 +2,8 @@
 import Image from "next/image";
 import useSWR from "swr";
 import fetchImages from "../lib/fetchImages";
+import { AiOutlineToTop } from "react-icons/ai";
+import { useEffect, useState } from "react";
 
 type ImageType = {
   name: string;
@@ -9,6 +11,23 @@ type ImageType = {
 };
 
 function Images() {
+  const [scrollButton, setScrollButton] = useState(false);
+
+  // Keep track of the scroll pos
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  // Function to handle the scroll event and set the visibility state
+  const toggleVisibility = () => {
+    if (window.scrollY > 500) {
+      setScrollButton(true);
+    } else {
+      setScrollButton(false);
+    }
+  };
+
   const {
     data: images,
     isLoading,
@@ -20,9 +39,23 @@ function Images() {
 
   return (
     <div className="p-8 lg:p-0">
+      {/* Scroll to top button */}
+      <button
+        className={`fixed bottom-24 right-10 p-4 rounded-full bg-cyan-500 z-50 drop-shadow opacity-70 transition-all duration-500 hover:opacity-100 hover:scale-110 ${
+          !scrollButton && `cursor-default hidden`
+        }`}
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
+        <AiOutlineToTop size="1.75em" color="white" />
+      </button>
+
+      {/* Refresh Images button */}
       <button
         onClick={() => refreshImages(images)}
         className="fixed bottom-10 right-10 bg-green-400/90 text-white px-5 py-3 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400 font-bold z-20"
+        disabled={!scrollButton}
       >
         {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
       </button>

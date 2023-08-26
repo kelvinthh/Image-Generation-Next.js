@@ -21,7 +21,7 @@ function Header() {
               <span className="text-blue-600 hover:underline">Kelvin Tam</span>
             </a>
           </h1>
-          <h2 className="text-xs">Powered by Open AI</h2>
+          <h2 className="text-xs">Powered by OpenAI</h2>
         </div>
       </div>
       {/* Right */}
