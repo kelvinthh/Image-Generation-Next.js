@@ -1,6 +1,7 @@
 "use client";
 
 import { Toaster } from "react-hot-toast";
+import { RecoilRoot } from "recoil";
 
 export default function RootLayout({
   children,
@@ -10,7 +11,7 @@ export default function RootLayout({
   return (
     <>
       <Toaster position="bottom-center" />
-      {children}
+      <RecoilRoot>{children}</RecoilRoot>
     </>
   );
 }

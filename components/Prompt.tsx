@@ -4,11 +4,13 @@ import fetchSuggestionFromChatGPT from "@/lib/fetchSuggestionFromChatGPT";
 import { FormEvent, useState, useCallback, use } from "react";
 import useSWR from "swr";
 import toast from "react-hot-toast";
+import { useRecoilState } from "recoil";
+import { promptInputState } from "@/states/promptInputState";
 
 // Declare this a client-side component
 
 function Prompt() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useRecoilState(promptInputState);
   const [isGenerating, setIsGenerating] = useState(false);
   const GENERATE_COOLDOWN = 30;
 
@@ -36,8 +38,9 @@ function Prompt() {
   const suggestionBlockWhenHasInput = () => {
     if (input)
       return (
-        <p className="italic pt-2 pl-2 font-light text-gray-300">
-          Suggestion: <span className="text-white">{suggestion}</span>
+        <p className="pt-2 pl-2 text-white font-bold">
+          ✨ Suggestion:{" "}
+          <span className="font-light select-all">{suggestion}</span>
         </p>
       );
   };

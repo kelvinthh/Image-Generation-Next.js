@@ -67,7 +67,7 @@ function Header() {
           href={"https://github.com/kelvinthh/Image-Generation-RN"}
           target="_blank"
         >
-          Mobile Ver.
+          Mobile App
         </Link>
       </div>
     </header>

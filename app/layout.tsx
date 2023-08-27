@@ -43,7 +43,7 @@ export default function RootLayout({
         {/* <!-- Meta Tags Generated via https://www.opengraph.xyz --> */}
       </Head>
       <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
-      <body className="bg-gradient-to-r from-cyan-500 via-green-500 to-blue-500">
+      <body className="bg-fixed bg-gradient-to-r from-cyan-500 via-green-500 to-blue-500">
         <ClientProvider>
           <noscript className="flex underline bg-red-600 text-white justify-center">
             <p className="text-center">
