@@ -64,7 +64,6 @@ function Images() {
       <button
         onClick={() => refreshImages(images)}
         className="fixed bottom-10 right-10 bg-green-400/90 text-white px-5 py-3 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400 font-bold z-20"
-        disabled={!scrollButton}
       >
         {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
       </button>

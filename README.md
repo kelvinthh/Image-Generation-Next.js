@@ -42,6 +42,10 @@ OPEN_AI_API_KEY=your_open_ai_key
 # Azure remote house, uncomment one below:
 # REMOTE_HOST=your_azure_remote_host_url (For deployment)
 # REMOTE_HOST=http://127.0.0.1:7071 	(Dev server only)
+# IMG_GEN_URL=https://yourdomain.com    (Leave blank if none)
+# IMG_GEN_DOMAIN=yourdomain.com         (Leave blank if none)
+# DEV_PREVIEW_URL=devpreview.yourvercelurl.com  (Leave blank if none)
+# OG_IMAGE=https://youropengraphimage.png
 
 # // API endpoint e.g. /api/getImages
 API_GENERATE_IMAGE=your_generateImage_api_endpoint
