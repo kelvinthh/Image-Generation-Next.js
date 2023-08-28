@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    unoptimized: true,
+    // unoptimized: true,
     domains: ["imggentoronto20236753cc.blob.core.windows.net", "i.imgur.com"],
   },
 };
