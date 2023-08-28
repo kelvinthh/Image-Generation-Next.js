@@ -4,7 +4,7 @@ export async function GET(request: Request) {
     `${process.env.REMOTE_HOST}${process.env.API_GET_IMAGES}`,
     {
       // cache: "no-store",
-      next: { revalidate: 3 },
+      next: { revalidate: 0 },
     }
   );
   const blob = await response.blob();
