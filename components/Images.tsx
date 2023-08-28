@@ -48,7 +48,7 @@ function ImageItem({ index, img, handleUsePromptBtn }: ImageItemProp) {
         width={800}
         height={800}
         className="w-full rounded-xl shadow-2xl drop-shadow-lg -z-10"
-        unoptimized={index > 3}
+        unoptimized={index > 1}
       />
     </div>
   );
@@ -106,7 +106,9 @@ function Images() {
         onClick={() => refreshImages(images)}
         className="fixed bottom-10 right-10 bg-green-400/90 text-white px-5 py-3 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400 font-bold z-20"
       >
-        {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
+        <span className="drop-shadow-sm">
+          {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
+        </span>
       </button>
       {isLoading && (
         <p className="animate-bounce text-center text-slate-100 pb-7 font-normal text-xl mt-48 sm:mt-80 drop-shadow-sm">

@@ -39,7 +39,7 @@ function Prompt() {
   const suggestionBlockWhenHasInput = () => {
     if (input)
       return (
-        <p className="pt-2 pl-2 text-white font-bold">
+        <p className="pt-2 pl-2 text-white font-bold drop-shadow-md">
           ✨ Suggestion:{" "}
           <span className="font-light select-all">{suggestion}</span>
         </p>
@@ -144,14 +144,14 @@ function Prompt() {
       >
         <textarea
           placeholder={handlePlaceHolder()}
-          className="flex-1 p-4 rounded-lg drop-shadow"
+          className="flex-1 p-4 rounded-lg shadow-lg"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
 
         <button
           className={`p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white drop-shadow ${
-            (!input || isGenerating) && `opacity-50 cursor-not-allowed`
+            (!input || isGenerating) && `opacity-50 cursor-not-allowed shadow-lg`
           }`}
           type="submit"
           disabled={!input || isGenerating}
@@ -160,7 +160,7 @@ function Prompt() {
         </button>
 
         <button
-          className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl drop-shadow"
+          className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl shadow-lg"
           type="button"
           onClick={handleNewSuggestion}
         >
@@ -172,7 +172,7 @@ function Prompt() {
             isGenerating
               ? "bg-cyan-50 text-cyan-300 bg-transparent"
               : "bg-cyan-100 text-cyan-800"
-          } rounded-xl border-none transition-colors duration-150 font-bold drop-shadow`}
+          } rounded-xl border-none transition-colors duration-150 font-bold shadow-lg`}
           type="button"
           onClick={() => handleUseSuggestion()}
           disabled={isGenerating}
