@@ -48,6 +48,7 @@ function ImageItem({ key, index, img, handleUsePromptBtn }: ImageItemProp) {
         width={800}
         height={800}
         className="w-full rounded-xl shadow-2xl drop-shadow-lg -z-10"
+        unoptimized={index > 3}
       />
     </div>
   );
