@@ -13,6 +13,46 @@ type ImageType = {
   url: string;
 };
 
+interface ImageItemProp {
+  key: string;
+  index: number;
+  img: ImageType;
+  handleUsePromptBtn: (prompt: string) => void;
+}
+
+function ImageItem({ key, index, img, handleUsePromptBtn }: ImageItemProp) {
+  const prompt = img.name.split("_").shift()?.toString().split(".").shift();
+  return (
+    <div
+      key={key}
+      className={`relative cursor-help 
+  ${index === 0 && "md:col-span-2 md:row-span-2"}
+  hover:scale-[103%] hover:-translate-y-2 transition-transform duration-200
+  ease-in-out
+  `}
+    >
+      <div className="absolute flex flex-col justify-center items-center w-full h-full bg-white opacity-0 hover:opacity-80 transition-opacity duration-200 z-10 rounded-xl">
+        <p className="text-center font-light text-lg p-5">{prompt}</p>
+        <button
+          onClick={() => handleUsePromptBtn(prompt || "")}
+          className="bg-cyan-600 bg-opacity-100 drop-shadow text-white px-4 py-2 rounded-full opacity-100 text-sm hover:-translate-y-1 hover:scale-105 transition-all duration-300 ease-in-out"
+        >
+          Use this prompt!
+        </button>
+      </div>
+      <Image
+        blurDataURL="/img/loading.svg"
+        placeholder="blur"
+        src={img.url}
+        alt={img.name}
+        width={800}
+        height={800}
+        className="w-full rounded-xl shadow-2xl drop-shadow-lg -z-10"
+      />
+    </div>
+  );
+}
+
 function Images() {
   const [scrollButton, setScrollButton] = useState(false);
   const setInput = useSetRecoilState(promptInputState);
@@ -77,43 +117,14 @@ function Images() {
         </p>
       )}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-0 md:px-10">
-        {images?.imageUrls.map((img: ImageType, i: number) => {
-          const prompt = img.name
-            .split("_")
-            .shift()
-            ?.toString()
-            .split(".")
-            .shift();
-          return (
-            <div
-              key={img.name}
-              className={`relative cursor-help 
-            ${i === 0 && "md:col-span-2 md:row-span-2"}
-            hover:scale-[103%] hover:-translate-y-2 transition-transform duration-200
-            ease-in-out
-            `}
-            >
-              <div className="absolute flex flex-col justify-center items-center w-full h-full bg-white opacity-0 hover:opacity-80 transition-opacity duration-200 z-10 rounded-xl">
-                <p className="text-center font-light text-lg p-5">{prompt}</p>
-                <button
-                  onClick={() => handleUsePromptBtn(prompt || "")}
-                  className="bg-cyan-600 bg-opacity-100 drop-shadow text-white px-4 py-2 rounded-full opacity-100 text-sm hover:-translate-y-1 hover:scale-105 transition-all duration-300 ease-in-out"
-                >
-                  Use this prompt!
-                </button>
-              </div>
-              <Image
-                blurDataURL="/img/loading.svg"
-                placeholder="blur"
-                src={img.url}
-                alt={img.name}
-                width={800}
-                height={800}
-                className="w-full rounded-xl shadow-2xl drop-shadow-lg -z-10"
-              />
-            </div>
-          );
-        })}
+        {images?.imageUrls.map((img: ImageType, i: number) => (
+          <ImageItem
+            index={i}
+            key={img.name}
+            img={img}
+            handleUsePromptBtn={handleUsePromptBtn}
+          />
+        ))}
       </div>
     </div>
   );
