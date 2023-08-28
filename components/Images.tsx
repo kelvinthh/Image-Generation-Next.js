@@ -20,11 +20,11 @@ interface ImageItemProp {
   handleUsePromptBtn: (prompt: string) => void;
 }
 
-function ImageItem({ key, index, img, handleUsePromptBtn }: ImageItemProp) {
+function ImageItem({ index, img, handleUsePromptBtn }: ImageItemProp) {
   const prompt = img.name.split("_").shift()?.toString().split(".").shift();
   return (
     <div
-      key={key}
+      key={img.name + new Date()}
       className={`relative cursor-help 
   ${index === 0 && "md:col-span-2 md:row-span-2"}
   hover:scale-[103%] hover:-translate-y-2 transition-transform duration-200

@@ -11,13 +11,14 @@ import { promptInputState } from "@/states/promptInputState";
 
 function Prompt() {
   const [input, setInput] = useRecoilState(promptInputState);
+  // const [input, setInput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const GENERATE_COOLDOWN = 30;
 
   const {
     data: suggestion,
     isLoading,
-    mutate,
+    mutate: updateSuggestion,
     isValidating,
   } = useSWR("/api/suggestion", fetchSuggestionFromChatGPT, {
     revalidateOnFocus: false,
@@ -67,6 +68,14 @@ function Prompt() {
       return;
     }
     await submitPrompt();
+  };
+
+  const handleNewSuggestion = () => {
+    try {
+      updateSuggestion();
+    } catch (error) {
+      console.log("Update Suggestion Err", error);
+    }
   };
 
   const handleUseSuggestion = async () => {
@@ -153,7 +162,7 @@ function Prompt() {
         <button
           className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl drop-shadow"
           type="button"
-          onClick={mutate}
+          onClick={handleNewSuggestion}
         >
           Gimme a new suggestion!
         </button>
