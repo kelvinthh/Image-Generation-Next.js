@@ -150,8 +150,10 @@ function Prompt() {
         />
 
         <button
-          className={`p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white drop-shadow ${
-            (!input || isGenerating) && `opacity-50 cursor-not-allowed shadow-lg`
+          className={`transition-all p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white drop-shadow ${
+            !input || isGenerating
+              ? `opacity-50 cursor-not-allowed shadow-lg`
+              : `hover:-translate-y-1 hover:scale-105 animate-pulse hover:animate-none`
           }`}
           type="submit"
           disabled={!input || isGenerating}
@@ -160,7 +162,7 @@ function Prompt() {
         </button>
 
         <button
-          className="p-4 bg-green-500 text-white border-none transition-colors duration-150 font-bold rounded-xl shadow-lg"
+          className="p-4 bg-green-500 text-white border-none transition-all duration-150 font-bold rounded-xl shadow-lg hover:-translate-y-1 hover:scale-105"
           type="button"
           onClick={handleNewSuggestion}
         >
@@ -168,10 +170,10 @@ function Prompt() {
         </button>
 
         <button
-          className={`p-4 ${
+          className={`p-4 transition-transform ${
             isGenerating
               ? "bg-cyan-50 text-cyan-300 bg-transparent"
-              : "bg-cyan-100 text-cyan-800"
+              : "bg-cyan-100 text-cyan-800 hover:-translate-y-1 hover:scale-105"
           } rounded-xl border-none transition-colors duration-150 font-bold shadow-lg`}
           type="button"
           onClick={() => handleUseSuggestion()}

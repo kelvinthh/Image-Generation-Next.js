@@ -111,13 +111,15 @@ function Images() {
         </span>
       </button>
       {isLoading && (
-        <p className="animate-bounce text-center text-slate-100 pb-7 font-normal text-xl mt-48 sm:mt-80 drop-shadow-sm">
-          Loading{" "}
-          <span className="font-bold bg-clip-text bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 text-transparent">
-            AI
-          </span>{" "}
-          images from the secret storage room...
-        </p>
+        <div className="flex items-center justify-center pb-7">
+          <p className="animate-bounce text-center text-white font-light text-xl mt-48 sm:mt-80 drop-shadow-sm bg-black bg-opacity-30 p-4 sm:px-8 rounded-lg">
+            Loading{" "}
+            <span className="font-bold bg-clip-text bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 text-transparent">
+              AI
+            </span>{" "}
+            images from the secret room... 💾
+          </p>
+        </div>
       )}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-0 md:px-10">
         {images?.imageUrls.map((img: ImageType, i: number) => (
