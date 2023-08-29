@@ -13,7 +13,7 @@ function Prompt() {
   const [input, setInput] = useRecoilState(promptInputState);
   // const [input, setInput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const GENERATE_COOLDOWN = 30;
+  const GENERATE_COOLDOWN = 10;
 
   const {
     data: suggestion,
