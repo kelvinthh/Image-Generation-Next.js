@@ -39,9 +39,9 @@ function Prompt() {
   const suggestionBlockWhenHasInput = () => {
     if (input)
       return (
-        <p className="pt-2 pl-2 text-white font-bold drop-shadow-md">
+        <p className="pt-2 pl-2 font-bold text-white drop-shadow-md">
           ✨ Suggestion:{" "}
-          <span className="font-light select-all">{suggestion}</span>
+          <span className="select-all font-light">{suggestion}</span>
         </p>
       );
   };
@@ -63,7 +63,7 @@ function Prompt() {
     e.preventDefault();
     if (!canGenerateImage()) {
       toast.error(
-        `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`
+        `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`,
       );
       return;
     }
@@ -82,7 +82,7 @@ function Prompt() {
     // console.log("Use Suggestion clicked!");
     if (!canGenerateImage()) {
       toast.error(
-        `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`
+        `You can only generate an image every ${GENERATE_COOLDOWN} seconds.`,
       );
       return;
     }
@@ -102,7 +102,7 @@ function Prompt() {
     const notificationPromptPromptShort = notificationPrompt.slice(0, 40);
 
     const notification = toast.loading(
-      `DALL‧E is creating: ${notificationPromptPromptShort}...`
+      `DALL‧E is creating: ${notificationPromptPromptShort}...`,
     );
 
     const res = await fetch("/api/generateImage", {
@@ -140,20 +140,20 @@ function Prompt() {
     <div className="mx-8 mt-4 lg:mx-10 lg:mb-8">
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="flex flex-col lg:flex-row lg:divide-x lg:space-x-4 space-y-2 lg:space-y-0 rounded-md"
+        className="flex flex-col space-y-2 rounded-md lg:flex-row lg:space-x-4 lg:space-y-0 lg:divide-x"
       >
         <textarea
           placeholder={handlePlaceHolder()}
-          className="flex-1 p-4 rounded-lg shadow-lg"
+          className="flex-1 rounded-lg p-4 shadow-lg"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
 
         <button
-          className={`transition-all p-4 rounded-xl border-none font-bold opacity-100 bg-blue-700 text-white drop-shadow ${
+          className={`rounded-xl border-none bg-blue-700 p-4 font-bold text-white opacity-100 drop-shadow transition-all ${
             !input || isGenerating
-              ? `opacity-50 cursor-not-allowed shadow-lg`
-              : `hover:-translate-y-1 hover:scale-105 animate-pulse hover:animate-none`
+              ? `cursor-not-allowed opacity-50 shadow-lg`
+              : `animate-pulse hover:-translate-y-1 hover:scale-105 hover:animate-none`
           }`}
           type="submit"
           disabled={!input || isGenerating}
@@ -162,7 +162,7 @@ function Prompt() {
         </button>
 
         <button
-          className="p-4 bg-green-500 text-white border-none transition-all duration-150 font-bold rounded-xl shadow-lg hover:-translate-y-1 hover:scale-105"
+          className="rounded-xl border-none bg-green-500 p-4 font-bold text-white shadow-lg transition-all duration-150 hover:-translate-y-1 hover:scale-105"
           type="button"
           onClick={handleNewSuggestion}
         >
@@ -172,9 +172,9 @@ function Prompt() {
         <button
           className={`p-4 transition-transform ${
             isGenerating
-              ? "bg-cyan-50 text-cyan-300 bg-transparent"
+              ? "bg-cyan-50 bg-transparent text-cyan-300"
               : "bg-cyan-100 text-cyan-800 hover:-translate-y-1 hover:scale-105"
-          } rounded-xl border-none transition-colors duration-150 font-bold shadow-lg`}
+          } rounded-xl border-none font-bold shadow-lg transition-colors duration-150`}
           type="button"
           onClick={() => handleUseSuggestion()}
           disabled={isGenerating}

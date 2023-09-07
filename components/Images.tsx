@@ -27,15 +27,15 @@ function ImageItem({ index, img, handleUsePromptBtn }: ImageItemProp) {
       key={img.name + new Date()}
       className={`relative cursor-help 
   ${index === 0 && "md:col-span-2 md:row-span-2"}
-  hover:scale-[103%] hover:-translate-y-2 transition-transform duration-200
-  ease-in-out
+  transition-transform duration-200 ease-in-out hover:-translate-y-2
+  hover:scale-[103%]
   `}
     >
-      <div className="absolute flex flex-col justify-center items-center w-full h-full bg-white opacity-0 hover:opacity-80 transition-opacity duration-200 z-10 rounded-xl">
-        <p className="text-center font-light text-lg p-5">{prompt}</p>
+      <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center rounded-xl bg-white opacity-0 transition-opacity duration-200 hover:opacity-80">
+        <p className="p-5 text-center text-lg font-light">{prompt}</p>
         <button
           onClick={() => handleUsePromptBtn(prompt || "")}
-          className="bg-cyan-600 bg-opacity-100 drop-shadow text-white px-4 py-2 rounded-full opacity-100 text-sm hover:-translate-y-1 hover:scale-105 transition-all duration-300 ease-in-out"
+          className="rounded-full bg-cyan-600 bg-opacity-100 px-4 py-2 text-sm text-white opacity-100 drop-shadow transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
         >
           Use this prompt!
         </button>
@@ -47,7 +47,7 @@ function ImageItem({ index, img, handleUsePromptBtn }: ImageItemProp) {
         alt={img.name}
         width={800}
         height={800}
-        className="w-full rounded-xl shadow-2xl drop-shadow-lg -z-10"
+        className="-z-10 w-full rounded-xl shadow-2xl drop-shadow-lg"
         unoptimized={index > 1}
       />
     </div>
@@ -91,8 +91,8 @@ function Images() {
     <div className="p-8 lg:p-0">
       {/* Scroll to top button */}
       <button
-        className={`fixed bottom-24 right-10 p-4 rounded-full bg-cyan-500 z-50 drop-shadow opacity-70 transition-all duration-500 hover:opacity-100 hover:scale-110 ${
-          !scrollButton && `cursor-default hidden`
+        className={`fixed bottom-24 right-10 z-50 rounded-full bg-cyan-500 p-4 opacity-70 drop-shadow transition-all duration-500 hover:scale-110 hover:opacity-100 ${
+          !scrollButton && `hidden cursor-default`
         }`}
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
@@ -104,7 +104,7 @@ function Images() {
       {/* Refresh Images button */}
       <button
         onClick={() => refreshImages(images)}
-        className="fixed bottom-10 right-10 bg-green-400/90 text-white px-5 py-3 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400 font-bold z-20"
+        className="fixed bottom-10 right-10 z-20 rounded-md bg-green-400/90 px-5 py-3 font-bold text-white hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400"
       >
         <span className="drop-shadow-sm">
           {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
@@ -112,16 +112,16 @@ function Images() {
       </button>
       {isLoading && (
         <div className="flex items-center justify-center pb-7">
-          <p className="animate-bounce text-center text-white font-light text-xl mt-48 sm:mt-80 drop-shadow-sm bg-black bg-opacity-30 p-4 sm:px-8 rounded-lg">
+          <p className="mt-48 animate-bounce rounded-lg bg-black bg-opacity-30 p-4 text-center text-xl font-light text-white drop-shadow-sm sm:mt-80 sm:px-8">
             Loading{" "}
-            <span className="font-bold bg-clip-text bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 text-transparent">
+            <span className="bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 bg-clip-text font-bold text-transparent">
               AI
             </span>{" "}
             images from the secret room... 💾
           </p>
         </div>
       )}
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-0 md:px-10">
+      <div className="grid grid-cols-1 gap-4 px-0 md:grid-cols-2 md:px-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {images?.imageUrls.map((img: ImageType, i: number) => (
           <ImageItem
             index={i}
