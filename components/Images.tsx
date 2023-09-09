@@ -111,7 +111,7 @@ function Images() {
         </span>
       </button>
       {isLoading ? (
-        <div className="flex animate-fade-up items-center justify-center pb-7 animate-delay-[600ms] animate-duration-1000 animate-once animate-ease-in-out">
+        <div className="flex animate-fade-up items-center justify-center pb-7 animate-delay-[600ms] animate-duration-1000 animate-ease-in-out">
           <p className="mt-48 animate-bounce rounded-lg bg-black bg-opacity-30 p-4 text-center text-xl font-light text-white drop-shadow-sm sm:mt-80 sm:px-8">
             Loading{" "}
             <span className="bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 bg-clip-text font-bold text-transparent">
@@ -121,7 +121,7 @@ function Images() {
           </p>
         </div>
       ) : (
-        <div className="grid animate-fade-up grid-cols-1 gap-4 px-0 animate-delay-[600ms] animate-duration-1000 animate-once animate-ease-in-out md:grid-cols-2 md:px-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid animate-fade-up grid-cols-1 gap-4 px-0 animate-delay-[600ms] animate-duration-1000 animate-ease-in-out md:grid-cols-2 md:px-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {images?.imageUrls.map((img: ImageType, i: number) => (
             <ImageItem
               index={i}

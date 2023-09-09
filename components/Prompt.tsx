@@ -39,7 +39,7 @@ function Prompt() {
   const suggestionBlockWhenHasInput = () => {
     if (input)
       return (
-        <p className="pt-2 pl-2 font-bold text-white drop-shadow-md">
+        <p className="animate-flip-down pt-2 pl-2 font-bold text-white drop-shadow-md animate-normal animate-duration-500 animate-once animate-ease-in-out">
           ✨ Suggestion:{" "}
           <span className="select-all font-light">{suggestion}</span>
         </p>
