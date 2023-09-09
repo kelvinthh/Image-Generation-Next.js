@@ -137,7 +137,7 @@ function Prompt() {
   };
 
   return (
-    <div className="mx-8 mt-4 lg:mx-10 lg:mb-8">
+    <div className="mx-8 mt-4 animate-fade-up animate-delay-[200ms] animate-duration-1000 animate-once animate-ease-in-out lg:mx-10 lg:mb-8">
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="flex flex-col space-y-2 rounded-md lg:flex-row lg:space-x-4 lg:space-y-0 lg:divide-x"

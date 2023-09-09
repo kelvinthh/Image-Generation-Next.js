@@ -104,14 +104,14 @@ function Images() {
       {/* Refresh Images button */}
       <button
         onClick={() => refreshImages(images)}
-        className="fixed bottom-10 right-10 z-20 rounded-md bg-green-400/90 px-5 py-3 font-bold text-white hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400"
+        className="fixed bottom-10 right-10 z-20 animate-fade rounded-md bg-green-400/90 px-5 py-3 font-bold text-white animate-delay-[800ms] animate-duration-1000 animate-once animate-ease-in-out hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-violet-400"
       >
         <span className="drop-shadow-sm">
           {!isLoading && isValidating ? "Refreshing..." : "Refresh Images"}
         </span>
       </button>
-      {isLoading && (
-        <div className="flex items-center justify-center pb-7">
+      {isLoading ? (
+        <div className="flex animate-fade-up items-center justify-center pb-7 animate-delay-[600ms] animate-duration-1000 animate-once animate-ease-in-out">
           <p className="mt-48 animate-bounce rounded-lg bg-black bg-opacity-30 p-4 text-center text-xl font-light text-white drop-shadow-sm sm:mt-80 sm:px-8">
             Loading{" "}
             <span className="bg-gradient-to-r from-zinc-200 via-orange-400 to-red-300 bg-clip-text font-bold text-transparent">
@@ -120,17 +120,18 @@ function Images() {
             images from the secret room... 💾
           </p>
         </div>
+      ) : (
+        <div className="grid animate-fade-up grid-cols-1 gap-4 px-0 animate-delay-[600ms] animate-duration-1000 animate-once animate-ease-in-out md:grid-cols-2 md:px-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {images?.imageUrls.map((img: ImageType, i: number) => (
+            <ImageItem
+              index={i}
+              key={img.name}
+              img={img}
+              handleUsePromptBtn={handleUsePromptBtn}
+            />
+          ))}
+        </div>
       )}
-      <div className="grid grid-cols-1 gap-4 px-0 md:grid-cols-2 md:px-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {images?.imageUrls.map((img: ImageType, i: number) => (
-          <ImageItem
-            index={i}
-            key={img.name}
-            img={img}
-            handleUsePromptBtn={handleUsePromptBtn}
-          />
-        ))}
-      </div>
     </div>
   );
 }

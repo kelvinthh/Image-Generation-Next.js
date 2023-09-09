@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 flex flex-col items-center justify-center space-y-2 bg-white p-4 shadow-md sm:flex-row sm:justify-between sm:space-y-0">
       {/* Left */}
-      <div className="flex items-center space-x-0 sm:space-x-2">
+      <div className="flex items-center space-x-0 sm:space-x-2 animate-fade sm:animate-fade-right animate-once animate-ease-in-out">
         <Image
           src="/img/image_FILL0_wght400_GRAD0_opsz48.svg"
           alt="logo"
@@ -25,7 +25,7 @@ function Header() {
         </div>
       </div>
       {/* Right */}
-      <div className="flex flex-row items-center text-center text-sm sm:text-base">
+      <div className="flex flex-row items-center text-center text-sm sm:text-base animate-fade sm:animate-fade-left animate-once animate-ease-in-out">
         <Link
           className="px-2 transition-all hover:-translate-y-1 hover:scale-105"
           href={"https://github.com/kelvinthh/Image-Generation-Next.js"}

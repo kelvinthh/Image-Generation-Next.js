@@ -22,6 +22,7 @@
     "react-icons": "^4.10.1",
     "recoil": "^0.7.7",
     "swr": "^2.2.2",
+    "tailwindcss-animated": "^1.0.1",
     "typescript": "5.0.2"
   },
   "devDependencies": {
