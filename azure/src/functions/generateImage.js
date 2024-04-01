@@ -14,17 +14,15 @@ app.http("generateImage", {
   handler: async (request) => {
     const { prompt } = await request.json();
 
-    // console.log(`Prompt: ${prompt}`);
-
     try {
-      const response = await openai.createImage({
+      const image = await openai.images.generate({
+        model: "dall-e-2",
         prompt: prompt,
         n: 1,
         size: "1024x1024",
       });
 
-      image_url = response.data.data[0].url;
-      // console.log("Image URL: " + image_url);
+      image_url = image.data[0].url;
 
       // Download the image as an ArrayBuffer
       const res = await axios.get(image_url, { responseType: "arraybuffer" });
@@ -48,7 +46,7 @@ app.http("generateImage", {
 
       try {
         await blockBlobClient.uploadData(arrayBuffer);
-        // console.log("File has been successfully uploaded.");
+        console.log("File has been successfully uploaded.");
       } catch (e) {
         console.error("Failed to upload:", e.message);
       }
