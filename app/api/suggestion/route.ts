@@ -11,6 +11,10 @@ export async function GET(request: Request) {
 
   const textData = await response.text();
 
+  if (response.status !== 200) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
   return new Response(JSON.stringify(textData.trim()), {
     status: 200,
   });
