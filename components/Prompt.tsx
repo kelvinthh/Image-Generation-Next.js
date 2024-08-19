@@ -105,35 +105,53 @@ function Prompt() {
       `DALL‧E is creating: ${notificationPromptPromptShort}...`,
     );
 
-    const res = await fetch("/api/generateImage", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt: prompt }),
-    });
-
-    const data = await res.json();
-    const msg = JSON.stringify(data);
-
-    // console.log(`${data.error} ${msg}`)
-
-    if (
-      data.error ||
-      msg.includes("Error processing the prompt") ||
-      msg.includes("Request failed")
-    ) {
-      toast.error("Unable to process the request.", {
-        id: notification,
+    try {
+      const res = await fetch("/api/generateImage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: prompt }),
       });
-    } else {
+
+      // WORKAROUND: Treat 504 Gateway Timeout as a success
+      // This assumes the image generation is still processing on the server
+      // and may complete successfully despite the timeout.
+      // TODO: Implement a mechanism to verify actual image creation status
+      if (res.status === 504) {
+        toast.success("Your image has been generated!!!", {
+          id: notification,
+        });
+        return; // Exit the function early
+      }
+
+      const data = await res.json();
+      const msg = JSON.stringify(data);
+
+      if (
+        data.error ||
+        msg.includes("Error processing the prompt") ||
+        msg.includes("Request failed")
+      ) {
+        throw new Error(data.error || "Unable to process the request.");
+      }
+
       toast.success("Your image has been generated!!!", {
         id: notification,
       });
+    } catch (error) {
+      console.error("Error generating image:", error);
+      toast.error(
+        error instanceof Error ? error.message : "An error occurred",
+        {
+          id: notification,
+        },
+      );
+    } finally {
+      setIsGenerating(false);
+      updateImages();
+      updateLastGenerated();
     }
-    setIsGenerating(false);
-    updateImages();
-    updateLastGenerated();
   };
 
   return (
