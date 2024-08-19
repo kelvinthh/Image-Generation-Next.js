@@ -94,8 +94,6 @@ function Prompt() {
     const inputPrompt = input;
     setInput("");
 
-    // console.log("Input prompt is: " + inputPrompt);
-
     const prompt = useSuggestion ? suggestion : inputPrompt;
 
     const notificationPrompt = prompt;
@@ -114,14 +112,25 @@ function Prompt() {
         body: JSON.stringify({ prompt: prompt }),
       });
 
-      // WORKAROUND: Treat 504 Gateway Timeout as a success
-      // This assumes the image generation is still processing on the server
-      // and may complete successfully despite the timeout.
-      // TODO: Implement a mechanism to verify actual image creation status
+      // WORKAROUND: Handle 504 Gateway Timeout
+      // This occurs on Vercel's hobby plan due to the 5-second execution limit
+      // We assume the image generation is still processing on the server
       if (res.status === 504) {
-        toast.success("Your image has been generated!!!", {
-          id: notification,
-        });
+        toast.success(
+          "Your image is being generated. The page will refresh shortly.",
+          {
+            id: notification,
+            duration: 5000, // Show for 5 seconds
+          },
+        );
+
+        // Schedule a page refresh after 2 seconds
+        setTimeout(() => {
+          setIsGenerating(false);
+          updateImages();
+          updateLastGenerated();
+        }, 2000);
+
         return; // Exit the function early
       }
 
