@@ -31,7 +31,7 @@ function ImageItem({ index, img, handleUsePromptBtn }: ImageItemProp) {
   hover:scale-[103%]
   `}
     >
-      <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center rounded-xl bg-white opacity-0 transition-opacity duration-200 hover:opacity-80">
+      <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center rounded-xl bg-white opacity-0 transition-opacity duration-200 hover:bg-opacity-50 hover:opacity-100 hover:backdrop-blur">
         <p className="p-5 text-center text-lg font-light">{prompt}</p>
         <button
           onClick={() => handleUsePromptBtn(prompt || "")}

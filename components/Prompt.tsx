@@ -171,7 +171,7 @@ function Prompt() {
       >
         <textarea
           placeholder={handlePlaceHolder()}
-          className="flex-1 rounded-lg p-4 shadow-lg"
+          className="flex-1 rounded-lg p-4 shadow-lg outline-none"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
