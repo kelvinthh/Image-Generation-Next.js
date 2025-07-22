@@ -124,10 +124,16 @@ function Prompt() {
           },
         );
 
-        // Schedule a page refresh after 2 seconds
+        // Schedule multiple refresh attempts to handle Azure blob propagation delay
+        const refreshAttempts = [2000, 5000, 8000];
+        refreshAttempts.forEach((delay) => {
+          setTimeout(() => {
+            updateImages();
+          }, delay);
+        });
+        
         setTimeout(() => {
           setIsGenerating(false);
-          updateImages();
           updateLastGenerated();
         }, 2000);
 
@@ -148,6 +154,11 @@ function Prompt() {
       toast.success("Your image has been generated!!!", {
         id: notification,
       });
+      
+      // Immediate refresh followed by delayed refreshes for Azure propagation
+      updateImages();
+      setTimeout(() => updateImages(), 3000);
+      setTimeout(() => updateImages(), 7000);
     } catch (error) {
       console.error("Error generating image:", error);
       toast.error(
@@ -158,7 +169,6 @@ function Prompt() {
       );
     } finally {
       setIsGenerating(false);
-      updateImages();
       updateLastGenerated();
     }
   };

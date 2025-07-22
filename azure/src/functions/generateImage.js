@@ -22,14 +22,14 @@ app.http("generateImage", {
         size: "1024x1024",
       });
 
-      image_url = image.data[0].url;
+      const imageUrl = image.data[0].url;
 
       // Download the image as an ArrayBuffer
-      const res = await axios.get(image_url, { responseType: "arraybuffer" });
+      const res = await axios.get(imageUrl, { responseType: "arraybuffer" });
 
       const arrayBuffer = res.data;
 
-      sasToken = await generateSASToken();
+      const sasToken = await generateSASToken();
 
       const blobServiceClient = new BlobServiceClient(
         `https://${accountName}.blob.core.windows.net?${sasToken}`
@@ -50,9 +50,15 @@ app.http("generateImage", {
       } catch (e) {
         console.error("Failed to upload:", e.message);
       }
-      return { body: "Successfully generated and uploaded an image." };
+      return { 
+        body: JSON.stringify({ 
+          message: "Successfully generated and uploaded an image.",
+          filename: file_name,
+          timestamp: timestamp
+        })
+      };
     } catch (error) {
-      return { status: 500, body: error };
+      return { status: 500, body: JSON.stringify({ error: error.message }) };
     }
   },
 });
