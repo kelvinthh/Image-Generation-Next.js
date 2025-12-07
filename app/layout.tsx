@@ -4,6 +4,7 @@ import Prompt from "@/components/Prompt";
 import ClientProvider from "@/components/ClientProvider";
 import Head from "next/head";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { Suspense } from 'react';
 
 export const metadata = {
   title: "AI Image Generator",
@@ -42,7 +43,9 @@ export default function RootLayout({
         <meta name="twitter:description" content={metadata.description} />
         {/* <!-- Meta Tags Generated via https://www.opengraph.xyz --> */}
       </Head>
-      <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
+      <Suspense>
+        <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
+      </Suspense>
       <body className="bg-gradient-to-br from-cyan-600 via-green-300 to-blue-400 bg-fixed">
         <ClientProvider>
           <noscript className="flex justify-center bg-red-600 text-white underline">
